@@ -24,5 +24,5 @@ public class Student {
     private LocalDate birthdate;
     private int semester;
     @ManyToMany
-    private List<Course> course;
+    private List<Course> courses;
 }

@@ -20,8 +20,8 @@ public class Course {
     private int id;
 
     private String name;
-    @ManyToMany(mappedBy = "course")
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.EAGER)
     private List<Student> students;
-    @ManyToMany(mappedBy = "course")
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.EAGER)
     private List<Teacher> teachers;
 }

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -24,8 +23,8 @@ public class InitDbService {
 
 	public void deleteDb() {
 		courseRepository.deleteAll();
-		studentRepository.deleteAll();
 		teacherRepository.deleteAll();
+		studentRepository.deleteAll();
 	}
 
 	@Transactional

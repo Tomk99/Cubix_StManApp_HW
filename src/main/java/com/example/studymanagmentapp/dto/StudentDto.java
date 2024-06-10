@@ -8,10 +8,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
 public class StudentDto {
 
     @Id
@@ -23,5 +19,5 @@ public class StudentDto {
     private LocalDate birthdate;
     private int semester;
     @ManyToMany
-    private List<CourseDto> course;
+    private List<CourseDto> courses;
 }

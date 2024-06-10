@@ -7,10 +7,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
 public class CourseDto {
 
     @Id
@@ -19,8 +15,8 @@ public class CourseDto {
     private int id;
 
     private String name;
-    @ManyToMany(mappedBy = "course")
+    @ManyToMany(mappedBy = "courses")
     private List<StudentDto> students;
-    @ManyToMany(mappedBy = "course")
+    @ManyToMany(mappedBy = "courses")
     private List<TeacherDto> teachers;
 }
