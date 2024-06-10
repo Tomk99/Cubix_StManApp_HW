@@ -17,6 +17,4 @@ public class TeacherDto {
 
     private String name;
     private LocalDate birthdate;
-    @ManyToMany
-    private List<CourseDto> courses;
 }

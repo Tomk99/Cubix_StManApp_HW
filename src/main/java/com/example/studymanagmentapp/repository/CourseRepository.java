@@ -2,6 +2,7 @@ package com.example.studymanagmentapp.repository;
 
 import com.example.studymanagmentapp.model.Course;
 import com.example.studymanagmentapp.model.QCourse;
+import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringExpression;
 import org.springframework.data.jpa.repository.JpaRepository;

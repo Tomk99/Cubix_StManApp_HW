@@ -18,6 +18,4 @@ public class StudentDto {
     private String name;
     private LocalDate birthdate;
     private int semester;
-    @ManyToMany
-    private List<CourseDto> courses;
 }

@@ -23,6 +23,4 @@ public class Student {
     private String name;
     private LocalDate birthdate;
     private int semester;
-    @ManyToMany
-    private List<Course> courses;
 }

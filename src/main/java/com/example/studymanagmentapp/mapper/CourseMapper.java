@@ -10,8 +10,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CourseMapper {
 
-    @Mapping(target = "students.courses",ignore = true)
-    @Mapping(target = "teachers.courses",ignore = true)
     CourseDto courseToDto(Course course);
     Course dtoToCourse(CourseDto courseDto);
     List<CourseDto> coursesToDtos(Iterable<Course> all);

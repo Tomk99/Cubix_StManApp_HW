@@ -15,8 +15,8 @@ public class CourseDto {
     private int id;
 
     private String name;
-    @ManyToMany(mappedBy = "courses")
+    @ManyToMany
     private List<StudentDto> students;
-    @ManyToMany(mappedBy = "courses")
+    @ManyToMany
     private List<TeacherDto> teachers;
 }
