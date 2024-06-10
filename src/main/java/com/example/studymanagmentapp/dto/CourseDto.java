@@ -1,9 +1,8 @@
-package com.example.studymanagmentapp.model;
+package com.example.studymanagmentapp.dto;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -11,9 +10,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Builder
 @Entity
-public class Teacher {
+public class CourseDto {
 
     @Id
     @GeneratedValue
@@ -21,7 +19,8 @@ public class Teacher {
     private int id;
 
     private String name;
-    private LocalDate birthdate;
-    @ManyToMany
-    private List<Course> course;
+    @ManyToMany(mappedBy = "course")
+    private List<StudentDto> students;
+    @ManyToMany(mappedBy = "course")
+    private List<TeacherDto> teachers;
 }

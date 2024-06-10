@@ -1,17 +1,17 @@
 package com.example.studymanagmentapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
 @Entity
 public class Student {
 
@@ -23,4 +23,6 @@ public class Student {
     private String name;
     private LocalDate birthdate;
     private int semester;
+    @ManyToMany
+    private List<Course> course;
 }

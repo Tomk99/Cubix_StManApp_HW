@@ -1,4 +1,4 @@
-package com.example.studymanagmentapp.model;
+package com.example.studymanagmentapp.dto;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,9 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Builder
 @Entity
-public class Teacher {
+public class TeacherDto {
 
     @Id
     @GeneratedValue
@@ -23,5 +22,5 @@ public class Teacher {
     private String name;
     private LocalDate birthdate;
     @ManyToMany
-    private List<Course> course;
+    private List<CourseDto> course;
 }
