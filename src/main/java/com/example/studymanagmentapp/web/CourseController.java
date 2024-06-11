@@ -26,6 +26,9 @@ public class CourseController {
     @GetMapping
     private List<CourseDto> findAll(@RequestParam Optional<Boolean> full,
                                     @QuerydslPredicate(root = Course.class, bindings = CourseRepository.class) Predicate predicate) {
-        return courseMapper.coursesToDtos(courseRepository.findAll(predicate));
+        Iterable<Course> all = courseRepository.findAll(predicate);
+        return full.orElse(false) ?
+                courseMapper.coursesToDtos(all):
+                courseMapper.coursesToSummaryDtos(all);
     }
 }
