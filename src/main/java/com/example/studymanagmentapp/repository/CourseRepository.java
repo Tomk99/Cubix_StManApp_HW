@@ -4,12 +4,16 @@ import com.example.studymanagmentapp.model.Course;
 import com.example.studymanagmentapp.model.QCourse;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringExpression;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CourseRepository
@@ -44,4 +48,20 @@ public interface CourseRepository
             }
         });
     };
+
+    @EntityGraph(attributePaths = {"students"})
+    @Query("select c from Course c")
+    List<Course> findAllWithStudents(Pageable pageable);
+
+    @EntityGraph(attributePaths = {"teachers"})
+    @Query("select c from Course c")
+    List<Course> findAllWithTeachers(Pageable pageable);
+
+    @EntityGraph(attributePaths = {"students"})
+    @Query("select c from Course c where c.id = :id")
+    Course findByIdWithStudents(int id);
+
+    @EntityGraph(attributePaths = {"teachers"})
+    @Query("select c from Course c where c.id = :id")
+    Course findByIdWithTeachers(int id);
 }

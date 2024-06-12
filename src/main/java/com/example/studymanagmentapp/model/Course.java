@@ -20,8 +20,8 @@ public class Course {
     private int id;
 
     private String name;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Student> students;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Teacher> teachers;
 }
