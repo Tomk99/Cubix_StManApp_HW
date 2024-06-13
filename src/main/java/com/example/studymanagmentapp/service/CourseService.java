@@ -18,8 +18,8 @@ public class CourseService {
 
     @Transactional
     public Iterable<Course> findAllWithAllParameters(Predicate predicate, Pageable pageable) {
-        Iterable<Course> all = courseRepository.findAllWithStudents(pageable);
-        all = courseRepository.findAllWithTeachers(pageable);
+        Iterable<Course> all = courseRepository.findAllWithStudents(predicate, pageable);
+        all = courseRepository.findAllWithTeachers(predicate, pageable);
         all = courseRepository.findAll(predicate, pageable);
         return all;
     }

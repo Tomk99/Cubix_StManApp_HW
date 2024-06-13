@@ -2,6 +2,7 @@ package com.example.studymanagmentapp.repository;
 
 import com.example.studymanagmentapp.model.Course;
 import com.example.studymanagmentapp.model.QCourse;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringExpression;
 import org.springframework.data.domain.Pageable;
@@ -51,11 +52,11 @@ public interface CourseRepository
 
     @EntityGraph(attributePaths = {"students"})
     @Query("select c from Course c")
-    List<Course> findAllWithStudents(Pageable pageable);
+    List<Course> findAllWithStudents(Predicate predicate, Pageable pageable);
 
     @EntityGraph(attributePaths = {"teachers"})
     @Query("select c from Course c")
-    List<Course> findAllWithTeachers(Pageable pageable);
+    List<Course> findAllWithTeachers(Predicate predicate, Pageable pageable);
 
     @EntityGraph(attributePaths = {"students"})
     @Query("select c from Course c where c.id = :id")
