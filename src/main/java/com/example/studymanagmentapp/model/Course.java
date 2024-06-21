@@ -3,7 +3,7 @@ package com.example.studymanagmentapp.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -11,6 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
+@NamedEntityGraph(name = "Course.students", attributeNodes = @NamedAttributeNode("students"))
+@NamedEntityGraph(name = "Course.teachers", attributeNodes = @NamedAttributeNode("teachers"))
 @Entity
 public class Course {
 
@@ -21,7 +23,7 @@ public class Course {
 
     private String name;
     @ManyToMany
-    private List<Student> students;
+    private Set<Student> students;
     @ManyToMany
-    private List<Teacher> teachers;
+    private Set<Teacher> teachers;
 }

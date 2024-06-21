@@ -21,7 +21,8 @@ public interface CourseRepository
         extends JpaRepository<Course, Integer>,
         QuerydslPredicateExecutor<Course>,
         QuerydslBinderCustomizer<QCourse>,
-        JpaSpecificationExecutor<Course> {
+        JpaSpecificationExecutor<Course>,
+        QuerydslWithEntityGraphRepository<Course, Integer>{
 
     @Override
     default void customize(QuerydslBindings bindings, QCourse course) {

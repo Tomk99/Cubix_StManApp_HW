@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -23,8 +23,8 @@ public class InitDbService {
 
 	public void deleteDb() {
 		courseRepository.deleteAll();
-		teacherRepository.deleteAll();
 		studentRepository.deleteAll();
+		teacherRepository.deleteAll();
 	}
 
 	@Transactional
@@ -41,10 +41,10 @@ public class InitDbService {
 		Teacher teacher4 = teacherRepository.save(Teacher.builder().name("Jill Smith").birthdate(LocalDate.of(1978,7,8)).build());
 
 		Course course1 = courseRepository.save(Course.builder().name("discrete mathematics").build());
-		course1.setStudents(List.of(student1,student2));
-		course1.setTeachers(List.of(teacher1));
+		course1.setStudents(Set.of(student1,student2));
+		course1.setTeachers(Set.of(teacher1));
 		Course course2 = courseRepository.save(Course.builder().name("robotics").build());
-		course2.setStudents(List.of(student3,student4));
-		course2.setTeachers(List.of(teacher3));
+		course2.setStudents(Set.of(student3,student4));
+		course2.setTeachers(Set.of(teacher3));
 	}
 }

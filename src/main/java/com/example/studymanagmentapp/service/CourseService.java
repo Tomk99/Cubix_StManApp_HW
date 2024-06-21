@@ -5,6 +5,7 @@ import com.example.studymanagmentapp.repository.CourseRepository;
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,9 +19,8 @@ public class CourseService {
 
     @Transactional
     public Iterable<Course> findAllWithAllParameters(Predicate predicate, Pageable pageable) {
-        Iterable<Course> all = courseRepository.findAllWithStudents(predicate, pageable);
-        all = courseRepository.findAllWithTeachers(predicate, pageable);
-        all = courseRepository.findAll(predicate, pageable);
+        Iterable<Course> all = courseRepository.findAll(predicate, "Course.students", Sort.unsorted());
+        all = courseRepository.findAll(predicate, "Course.teachers",Sort.unsorted());
         return all;
     }
 

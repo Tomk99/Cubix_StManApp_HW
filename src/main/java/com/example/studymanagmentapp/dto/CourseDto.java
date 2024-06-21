@@ -3,7 +3,7 @@ package com.example.studymanagmentapp.dto;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,7 +16,7 @@ public class CourseDto {
 
     private String name;
     @ManyToMany
-    private List<StudentDto> students;
+    private Set<StudentDto> students;
     @ManyToMany
-    private List<TeacherDto> teachers;
+    private Set<TeacherDto> teachers;
 }
