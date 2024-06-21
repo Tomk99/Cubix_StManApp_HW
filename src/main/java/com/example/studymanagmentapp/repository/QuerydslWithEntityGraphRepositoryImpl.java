@@ -6,6 +6,9 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.support.Querydsl;
@@ -29,10 +32,14 @@ public class QuerydslWithEntityGraphRepositoryImpl extends SimpleJpaRepository<C
     }
 
     @Override
-    public List<Course> findAll(Predicate predicate, String entityGraphName, Sort sort) {
-        JPAQuery query = (JPAQuery) querydsl.applySorting(sort, createQuery(predicate).select(path));
+    public Page<Course> findAll(Predicate predicate, String entityGraphName, Pageable pageable) {
+        JPAQuery query = (JPAQuery) querydsl.applyPagination(pageable, createQuery(predicate).select(path));
         query.setHint(EntityGraph.EntityGraphType.LOAD.getKey(), entityManager.getEntityGraph(entityGraphName));
-        return query.fetch();
+
+        long total = query.fetchCount();
+        List<Course> content = query.fetch();
+
+        return new PageImpl<>(content, pageable, total);
     }
 
     private JPAQuery createQuery(Predicate predicate) {

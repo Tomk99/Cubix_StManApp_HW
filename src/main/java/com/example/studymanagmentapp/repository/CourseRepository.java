@@ -49,15 +49,7 @@ public interface CourseRepository
                 return Optional.empty();
             }
         });
-    };
-
-    @EntityGraph(attributePaths = {"students"})
-    @Query("select c from Course c")
-    List<Course> findAllWithStudents(Predicate predicate, Pageable pageable);
-
-    @EntityGraph(attributePaths = {"teachers"})
-    @Query("select c from Course c")
-    List<Course> findAllWithTeachers(Predicate predicate, Pageable pageable);
+    }
 
     @EntityGraph(attributePaths = {"students"})
     @Query("select c from Course c where c.id = :id")

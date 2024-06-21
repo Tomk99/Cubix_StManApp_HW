@@ -1,10 +1,8 @@
 package com.example.studymanagmentapp.repository;
 
 import com.querydsl.core.types.Predicate;
-import org.springframework.data.domain.Sort;
-
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 public interface QuerydslWithEntityGraphRepository<T,ID> {
-    List<T> findAll(Predicate predicate, String entityGraphName, Sort sort);
+    Page<T> findAll(Predicate predicate, String entityGraphName, Pageable pageable);
 }

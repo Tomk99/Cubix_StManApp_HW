@@ -4,11 +4,13 @@ import com.example.studymanagmentapp.model.Course;
 import com.example.studymanagmentapp.repository.CourseRepository;
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
@@ -18,10 +20,10 @@ public class CourseService {
     private final CourseRepository courseRepository;
 
     @Transactional
-    public Iterable<Course> findAllWithAllParameters(Predicate predicate, Pageable pageable) {
-        Iterable<Course> all = courseRepository.findAll(predicate, "Course.students", Sort.unsorted());
-        all = courseRepository.findAll(predicate, "Course.teachers",Sort.unsorted());
-        return all;
+    public List<Course> findAllWithAllParameters(Predicate predicate, Pageable pageable) {
+        Page<Course> all = courseRepository.findAll(predicate, "Course.students", pageable);
+        all = courseRepository.findAll(predicate, "Course.teachers", pageable);
+        return all.getContent();
     }
 
     @Transactional
