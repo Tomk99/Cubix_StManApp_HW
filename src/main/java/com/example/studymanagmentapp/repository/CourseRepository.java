@@ -6,6 +6,7 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringExpression;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -58,4 +59,11 @@ public interface CourseRepository
     @EntityGraph(attributePaths = {"teachers"})
     @Query("select c from Course c where c.id = :id")
     Course findByIdWithTeachers(int id);
+
+    @EntityGraph("Course.students")
+    @Query("select c from Course c where c.id in :ids")
+    List<Course> findByIdInWithStudents(List<Integer> ids, Sort sort);
+    @EntityGraph("Course.teachers")
+    @Query("select c from Course c where c.id in :ids")
+    List<Course> findByIdInWithTeachers(List<Integer> ids, Sort sort);
 }
