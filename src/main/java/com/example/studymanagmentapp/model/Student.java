@@ -2,6 +2,7 @@ package com.example.studymanagmentapp.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Cacheable
+@Audited
 public class Student {
 
     @Id
@@ -23,4 +25,6 @@ public class Student {
     private String name;
     private LocalDate birthdate;
     private int semester;
+    private int eduId;
+    private int numFreeSemesters;
 }

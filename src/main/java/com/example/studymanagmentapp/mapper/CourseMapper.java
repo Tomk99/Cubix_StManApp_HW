@@ -1,7 +1,9 @@
 package com.example.studymanagmentapp.mapper;
 
 import com.example.studymanagmentapp.dto.CourseDto;
+import com.example.studymanagmentapp.dto.HistoryDataDto;
 import com.example.studymanagmentapp.model.Course;
+import com.example.studymanagmentapp.model.HistoryData;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -22,4 +24,6 @@ public interface CourseMapper {
     List<CourseDto> coursesToDtos(Iterable<Course> all);
     @IterableMapping(qualifiedByName = "summary")
     List<CourseDto> coursesToSummaryDtos(Iterable<Course> all);
+
+    List<HistoryDataDto<CourseDto>> courseHistoriesToHistoryDataCourseDtos(List<HistoryData<Course>> historyById);
 }

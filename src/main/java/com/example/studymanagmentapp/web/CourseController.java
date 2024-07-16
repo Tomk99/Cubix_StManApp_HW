@@ -1,6 +1,7 @@
 package com.example.studymanagmentapp.web;
 
 import com.example.studymanagmentapp.dto.CourseDto;
+import com.example.studymanagmentapp.dto.HistoryDataDto;
 import com.example.studymanagmentapp.mapper.CourseMapper;
 import com.example.studymanagmentapp.model.Course;
 import com.example.studymanagmentapp.repository.CourseRepository;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -46,5 +48,15 @@ public class CourseController {
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/{id}/versions")
+    private List<HistoryDataDto<CourseDto>> getHistory(@PathVariable int id) {
+        return courseMapper.courseHistoriesToHistoryDataCourseDtos(courseService.getHistoryById(id));
+    }
+
+    @GetMapping("/history/{id}")
+    public CourseDto getVersionsAt(@PathVariable int id, @RequestParam OffsetDateTime at) {
+        return courseMapper.courseToDto(courseService.getVersionAt(id, at));
     }
 }

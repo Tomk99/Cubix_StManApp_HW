@@ -2,6 +2,7 @@ package com.example.studymanagmentapp.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import java.util.Set;
 @NamedEntityGraph(name = "Course.students", attributeNodes = @NamedAttributeNode("students"))
 @NamedEntityGraph(name = "Course.teachers", attributeNodes = @NamedAttributeNode("teachers"))
 @Entity
+@Audited
 public class Course {
 
     @Id
