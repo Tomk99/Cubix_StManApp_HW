@@ -72,6 +72,18 @@ paths:
           schema:
             type: integer
             format: int32
+        - schema:
+            type: integer
+          in: query
+          name: page
+        - schema:
+            type: integer
+          in: query
+          name: size
+        - schema:
+            type: string
+          in: query
+          name: sort
       responses:
         '200':
           description: OK
@@ -81,8 +93,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CourseDto'
-      requestBody:
-        content: {}
   '/api/courses/{id}':
     get:
       tags:

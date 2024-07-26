@@ -3,7 +3,6 @@ package com.example.studymanagmentapp.web;
 import com.example.studymanagmentapp.api.CourseControllerApi;
 import com.example.studymanagmentapp.api.model.CourseDto;
 import com.example.studymanagmentapp.api.model.HistoryDataDtoCourseDto;
-import com.example.studymanagmentapp.api.model.Pageable;
 import com.example.studymanagmentapp.model.Course;
 import com.example.studymanagmentapp.repository.CourseRepository;
 import com.example.studymanagmentapp.service.CourseService;
@@ -41,7 +40,7 @@ public class CourseController implements CourseControllerApi {
     }
 
     @Override
-    public ResponseEntity<List<CourseDto>> findAll(Pageable pageable, Boolean full, String teachers, String name, String students, Integer id) {
+    public ResponseEntity<List<CourseDto>> findAll(Boolean full, String teachers, String name, String students, Integer id, ) {
         return CourseControllerApi.super.findAll(pageable, full, teachers, name, students, id);
     }
 
