@@ -82,6 +82,7 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -119,7 +120,7 @@
                             <version>0.2.0</version>
                         </path>
                         <path>
-                            <groupId>org.hibernate</groupId>
+                            <groupId>org.hibernate.orm</groupId>
                             <artifactId>hibernate-jpamodelgen</artifactId>
                             <version>${hibernate.version}</version>
                         </path>
@@ -138,6 +139,31 @@
                         <configuration>
                             <outputDirectory>target/generated-sources/java</outputDirectory>
                             <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.7.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/sma-openapi/sma-openapi.yml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <configOptions>
+                                <useTags>true</useTags>
+                                <dateLibrary>java8-localdatetime</dateLibrary>
+                                <configPackage>com.example.studymanagmentapp.api.config</configPackage>
+                                <interfaceOnly>true</interfaceOnly>
+                                <useSpringBoot3>true</useSpringBoot3>
+                            </configOptions>
+                            <apiPackage>com.example.studymanagmentapp.api</apiPackage>
+                            <modelPackage>com.example.studymanagmentapp.api.model</modelPackage>
                         </configuration>
                     </execution>
                 </executions>

@@ -1,62 +1,94 @@
 package com.example.studymanagmentapp.web;
 
-import com.example.studymanagmentapp.dto.CourseDto;
-import com.example.studymanagmentapp.dto.HistoryDataDto;
-import com.example.studymanagmentapp.mapper.CourseMapper;
+import com.example.studymanagmentapp.api.CourseControllerApi;
+import com.example.studymanagmentapp.api.model.CourseDto;
+import com.example.studymanagmentapp.api.model.HistoryDataDtoCourseDto;
+import com.example.studymanagmentapp.api.model.Pageable;
 import com.example.studymanagmentapp.model.Course;
 import com.example.studymanagmentapp.repository.CourseRepository;
 import com.example.studymanagmentapp.service.CourseService;
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
+import org.springframework.core.MethodParameter;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.data.web.SortDefault;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.web.querydsl.QuerydslPredicateArgumentResolver;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.support.WebDataBinderFactory;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.method.support.ModelAndViewContainer;
 
-import java.time.OffsetDateTime;
+import java.lang.reflect.Method;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/courses")
-public class CourseController {
+public class CourseController implements CourseControllerApi {
 
-    private final CourseRepository courseRepository;
-    private final CourseMapper courseMapper;
+    private final NativeWebRequest nativeWebRequest;
     private final CourseService courseService;
+    private final CourseRepository courseRepository;
+    private final QuerydslPredicateArgumentResolver predicateResolver;
+    private final PageableHandlerMethodArgumentResolver pageableResolver;
 
-    @GetMapping
-    private List<CourseDto> findAll(@RequestParam Optional<Boolean> full,
-                                    @QuerydslPredicate(root = Course.class, bindings = CourseRepository.class) Predicate predicate,
-                                    @SortDefault(sort = "id") Pageable pageable) {
-        List<CourseDto> all = null;
-        if (full.orElse(false)) {
-            return all = courseMapper.coursesToDtos(courseService.findAllWithAllParameters(predicate, pageable));
-        } else {
-            return all = courseMapper.coursesToSummaryDtos(courseRepository.findAll(predicate, pageable));
-        }
+    @Override
+    public Optional<NativeWebRequest> getRequest() {
+        return Optional.of(nativeWebRequest);
     }
 
-    @GetMapping("/{id}")
-    private CourseDto findById(@PathVariable int id) {
+    @Override
+    public ResponseEntity<List<CourseDto>> findAll(Pageable pageable, Boolean full, String teachers, String name, String students, Integer id) {
+        return CourseControllerApi.super.findAll(pageable, full, teachers, name, students, id);
+    }
+
+    @Override
+    public ResponseEntity<CourseDto> findById(Integer id) {
+        return CourseControllerApi.super.findById(id);
+    }
+
+    @Override
+    public ResponseEntity<CourseDto> getHistory(Integer id, LocalDateTime at) {
+        return CourseControllerApi.super.getHistory(id, at);
+    }
+
+    @Override
+    public ResponseEntity<List<HistoryDataDtoCourseDto>> getVersionsAt(Integer id) {
+        return CourseControllerApi.super.getVersionsAt(id);
+    }
+
+    private Predicate createPredicate(String configMethodName) {
+        Method method = null;
         try {
-            return courseMapper.courseToDto(courseService.findByIdWithAllParameters(id));
-        } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            method = this.getClass().getMethod(configMethodName, Predicate.class);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        MethodParameter methodParameter = new MethodParameter(method, 0);
+        ModelAndViewContainer mavContainer = null;
+        WebDataBinderFactory binderFactory = null;
+        try {
+            return (Predicate) predicateResolver.resolveArgument(methodParameter, mavContainer, nativeWebRequest, binderFactory);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
-
-    @GetMapping("/{id}/versions")
-    private List<HistoryDataDto<CourseDto>> getHistory(@PathVariable int id) {
-        return courseMapper.courseHistoriesToHistoryDataCourseDtos(courseService.getHistoryById(id));
+    private org.springframework.data.domain.Pageable createPageable(String pageableConfigurerMethodName) {
+        Method method = null;
+        try {
+            method = this.getClass().getMethod(pageableConfigurerMethodName, org.springframework.data.domain.Pageable.class);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        MethodParameter methodParameter = new MethodParameter(method, 0);
+        ModelAndViewContainer mavContainer = null;
+        WebDataBinderFactory binderFactory = null;
+        org.springframework.data.domain.Pageable pageable = pageableResolver.resolveArgument(methodParameter, mavContainer, nativeWebRequest, binderFactory);
+        return pageable;
     }
-
-    @GetMapping("/history/{id}")
-    public CourseDto getVersionsAt(@PathVariable int id, @RequestParam OffsetDateTime at) {
-        return courseMapper.courseToDto(courseService.getVersionAt(id, at));
-    }
+    public void configurePredicate(@QuerydslPredicate(root = Course.class) Predicate predicate) {}
+    public void configPageable(@SortDefault("id") org.springframework.data.domain.Pageable pageable) {}
 }

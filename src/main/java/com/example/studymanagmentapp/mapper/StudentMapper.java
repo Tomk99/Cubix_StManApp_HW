@@ -1,6 +1,6 @@
 package com.example.studymanagmentapp.mapper;
 
-import com.example.studymanagmentapp.dto.StudentDto;
+import com.example.studymanagmentapp.api.model.StudentDto;
 import com.example.studymanagmentapp.model.Student;
 import org.mapstruct.Mapper;
 
