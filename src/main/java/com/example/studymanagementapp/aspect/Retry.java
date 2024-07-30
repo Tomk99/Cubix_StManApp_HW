@@ -1,4 +1,4 @@
-package com.example.studymanagmentapp.aspect;
+package com.example.studymanagementapp.aspect;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

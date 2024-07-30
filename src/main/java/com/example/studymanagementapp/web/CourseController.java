@@ -1,12 +1,12 @@
-package com.example.studymanagmentapp.web;
+package com.example.studymanagementapp.web;
 
-import com.example.studymanagmentapp.api.CourseControllerApi;
-import com.example.studymanagmentapp.api.model.CourseDto;
-import com.example.studymanagmentapp.api.model.HistoryDataCourseDto;
-import com.example.studymanagmentapp.mapper.CourseMapper;
-import com.example.studymanagmentapp.model.Course;
-import com.example.studymanagmentapp.repository.CourseRepository;
-import com.example.studymanagmentapp.service.CourseService;
+import com.example.studymanagementapp.api.CourseControllerApi;
+import com.example.studymanagementapp.api.model.CourseDto;
+import com.example.studymanagementapp.api.model.HistoryDataCourseDto;
+import com.example.studymanagementapp.mapper.CourseMapper;
+import com.example.studymanagementapp.model.Course;
+import com.example.studymanagementapp.repository.CourseRepository;
+import com.example.studymanagementapp.service.CourseService;
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
@@ -27,7 +27,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.NoSuchElementException;

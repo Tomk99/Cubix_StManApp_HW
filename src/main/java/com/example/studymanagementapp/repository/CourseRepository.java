@@ -1,11 +1,9 @@
-package com.example.studymanagmentapp.repository;
+package com.example.studymanagementapp.repository;
 
-import com.example.studymanagmentapp.model.Course;
-import com.example.studymanagmentapp.model.QCourse;
-import com.querydsl.core.types.Predicate;
+import com.example.studymanagementapp.model.Course;
+import com.example.studymanagementapp.model.QCourse;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringExpression;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

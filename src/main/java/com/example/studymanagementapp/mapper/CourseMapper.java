@@ -1,9 +1,9 @@
-package com.example.studymanagmentapp.mapper;
+package com.example.studymanagementapp.mapper;
 
-import com.example.studymanagmentapp.api.model.CourseDto;
-import com.example.studymanagmentapp.api.model.HistoryDataCourseDto;
-import com.example.studymanagmentapp.model.Course;
-import com.example.studymanagmentapp.model.HistoryData;
+import com.example.studymanagementapp.api.model.CourseDto;
+import com.example.studymanagementapp.api.model.HistoryDataCourseDto;
+import com.example.studymanagementapp.model.Course;
+import com.example.studymanagementapp.model.HistoryData;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

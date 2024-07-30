@@ -184,12 +184,12 @@
                             <configOptions>
                                 <useTags>true</useTags>
                                 <dateLibrary>java8-localdatetime</dateLibrary>
-                                <configPackage>com.example.studymanagmentapp.api.config</configPackage>
+                                <configPackage>com.example.studymanagementapp.api.config</configPackage>
                                 <interfaceOnly>true</interfaceOnly>
                                 <useSpringBoot3>true</useSpringBoot3>
                             </configOptions>
-                            <apiPackage>com.example.studymanagmentapp.api</apiPackage>
-                            <modelPackage>com.example.studymanagmentapp.api.model</modelPackage>
+                            <apiPackage>com.example.studymanagementapp.api</apiPackage>
+                            <modelPackage>com.example.studymanagementapp.api.model</modelPackage>
                         </configuration>
                     </execution>
                 </executions>

@@ -1,4 +1,4 @@
-package com.example.studymanagmentapp.aspect;
+package com.example.studymanagementapp.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
 @Component
 public class RetryAspect {
 
-    @Pointcut("@annotation(com.example.studymanagmentapp.aspect.Retry) || @within(com.example.studymanagmentapp.aspect.Retry)")
+    @Pointcut("@annotation(com.example.studymanagementapp.aspect.Retry) || @within(com.example.studymanagementapp.aspect.Retry)")
     public void retryPointCut() {}
 
     @Around("retryPointCut()")

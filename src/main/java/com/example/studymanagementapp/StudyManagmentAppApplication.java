@@ -1,6 +1,6 @@
-package com.example.studymanagmentapp;
+package com.example.studymanagementapp;
 
-import com.example.studymanagmentapp.service.InitDbService;
+import com.example.studymanagementapp.service.InitDbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

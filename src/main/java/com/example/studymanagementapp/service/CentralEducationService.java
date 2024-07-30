@@ -1,6 +1,6 @@
-package com.example.studymanagmentapp.service;
+package com.example.studymanagementapp.service;
 
-import com.example.studymanagmentapp.aspect.Retry;
+import com.example.studymanagementapp.aspect.Retry;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;

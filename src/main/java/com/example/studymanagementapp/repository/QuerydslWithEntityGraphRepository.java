@@ -1,4 +1,4 @@
-package com.example.studymanagmentapp.repository;
+package com.example.studymanagementapp.repository;
 
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;

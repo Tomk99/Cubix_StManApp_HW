@@ -1,12 +1,10 @@
-package com.example.studymanagmentapp.service;
+package com.example.studymanagementapp.service;
 
-import com.example.studymanagmentapp.model.Course;
-import com.example.studymanagmentapp.model.HistoryData;
-import com.example.studymanagmentapp.model.QCourse;
-import com.example.studymanagmentapp.repository.CourseRepository;
+import com.example.studymanagementapp.model.Course;
+import com.example.studymanagementapp.model.HistoryData;
+import com.example.studymanagementapp.repository.CourseRepository;
 import com.querydsl.core.types.Predicate;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NamedEntityGraph;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +13,8 @@ import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.envers.RevisionType;
 import org.hibernate.envers.query.AuditEntity;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,4 +1,4 @@
-package com.example.studymanagmentapp.model;
+package com.example.studymanagementapp.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Entity
 @Cacheable
 @Audited
-public class Student {
+public class Teacher {
 
     @Id
     @GeneratedValue
@@ -24,7 +24,4 @@ public class Student {
 
     private String name;
     private LocalDate birthdate;
-    private int semester;
-    private int eduId;
-    private int numFreeSemesters;
 }

@@ -1,11 +1,11 @@
-package com.example.studymanagmentapp.service;
+package com.example.studymanagementapp.service;
 
-import com.example.studymanagmentapp.model.Course;
-import com.example.studymanagmentapp.model.Student;
-import com.example.studymanagmentapp.model.Teacher;
-import com.example.studymanagmentapp.repository.CourseRepository;
-import com.example.studymanagmentapp.repository.StudentRepository;
-import com.example.studymanagmentapp.repository.TeacherRepository;
+import com.example.studymanagementapp.model.Course;
+import com.example.studymanagementapp.model.Student;
+import com.example.studymanagementapp.model.Teacher;
+import com.example.studymanagementapp.repository.CourseRepository;
+import com.example.studymanagementapp.repository.StudentRepository;
+import com.example.studymanagementapp.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;

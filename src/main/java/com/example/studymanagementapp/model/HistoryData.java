@@ -1,4 +1,4 @@
-package com.example.studymanagmentapp.model;
+package com.example.studymanagementapp.model;
 
 
 import lombok.AllArgsConstructor;

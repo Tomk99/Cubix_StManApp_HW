@@ -1,6 +1,6 @@
-package com.example.studymanagmentapp.repository;
+package com.example.studymanagementapp.repository;
 
-import com.example.studymanagmentapp.model.Course;
+import com.example.studymanagementapp.model.Course;
 import com.querydsl.core.types.EntityPath;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.PathBuilder;

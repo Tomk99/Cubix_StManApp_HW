@@ -1,9 +1,9 @@
-package com.example.studymanagmentapp.web;
+package com.example.studymanagementapp.web;
 
-import com.example.studymanagmentapp.api.TeacherControllerApi;
-import com.example.studymanagmentapp.api.model.TeacherDto;
-import com.example.studymanagmentapp.mapper.TeacherMapper;
-import com.example.studymanagmentapp.repository.TeacherRepository;
+import com.example.studymanagementapp.api.TeacherControllerApi;
+import com.example.studymanagementapp.api.model.TeacherDto;
+import com.example.studymanagementapp.mapper.TeacherMapper;
+import com.example.studymanagementapp.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
