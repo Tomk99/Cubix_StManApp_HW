@@ -43,7 +43,6 @@ public class CourseController implements CourseControllerApi {
     private final CourseMapper courseMapper;
     private final QuerydslPredicateArgumentResolver predicateResolver;
     private final PageableHandlerMethodArgumentResolver pageableResolver;
-
     HttpHeaders headers = new HttpHeaders();
 
     @Override
