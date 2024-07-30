@@ -7,6 +7,8 @@ import com.example.studymanagmentapp.repository.CourseRepository;
 import com.querydsl.core.types.Predicate;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NamedEntityGraph;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.DefaultRevisionEntity;
@@ -80,7 +82,7 @@ public class CourseService {
     }
 
     @Transactional
-    public Course getVersionAt(int id, OffsetDateTime at) {
+    public Course getVersionAt(Integer id, @NotNull @Valid OffsetDateTime at) {
         Course course = AuditReaderFactory.get(entityManager).find(Course.class, id, Date.from(at.toInstant()));
         if (course == null) return null;
         fetchRelationships(course);

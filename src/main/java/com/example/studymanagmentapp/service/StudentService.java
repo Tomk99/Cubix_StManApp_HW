@@ -14,7 +14,7 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final CentralEducationService centralEducationService;
 
-    @Scheduled(cron = "${studymanagementapp.updateFreeSemester.cron}")
+    //@Scheduled(cron = "${studymanagementapp.updateFreeSemester.cron}")
     public void updateFreeSemesters() {
         List<Student> students = studentRepository.findAll();
         students.forEach(student -> {

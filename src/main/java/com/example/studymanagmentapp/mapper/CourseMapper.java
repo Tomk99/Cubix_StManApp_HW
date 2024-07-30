@@ -1,14 +1,13 @@
 package com.example.studymanagmentapp.mapper;
 
 import com.example.studymanagmentapp.api.model.CourseDto;
-import com.example.studymanagmentapp.api.model.HistoryDataDto;
+import com.example.studymanagmentapp.api.model.HistoryDataCourseDto;
 import com.example.studymanagmentapp.model.Course;
 import com.example.studymanagmentapp.model.HistoryData;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import org.springframework.data.jpa.repository.EntityGraph;
 
 import java.util.List;
 
@@ -25,5 +24,5 @@ public interface CourseMapper {
     @IterableMapping(qualifiedByName = "summary")
     List<CourseDto> coursesToSummaryDtos(Iterable<Course> all);
 
-    List<HistoryDataDto<CourseDto>> courseHistoriesToHistoryDataCourseDtos(List<HistoryData<Course>> historyById);
+    List<HistoryDataCourseDto> courseHistoriesToHistoryDataCourseDtos(List<HistoryData<Course>> historyById);
 }

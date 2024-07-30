@@ -124,27 +124,6 @@ paths:
           schema:
             type: integer
             format: int32
-      responses:
-        '200':
-          description: OK
-          content:
-            '*/*':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/HistoryDataDtoCourseDto'
-  '/api/courses/history/{id}':
-    get:
-      tags:
-        - course-controller
-      operationId: getHistory
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
         - name: at
           in: query
           required: true
@@ -158,6 +137,27 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/CourseDto'
+  '/api/courses/history/{id}':
+    get:
+      tags:
+        - course-controller
+      operationId: getHistory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HistoryDataCourseDto'
 components:
   schemas:
     TeacherDto:
@@ -203,8 +203,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TeacherDto'
-    HistoryDataDtoCourseDto:
+    HistoryDataCourseDto:
       type: object
+      x-stoplight:
+        id: 6bd58968d7bb7
       properties:
         data:
           $ref: '#/components/schemas/CourseDto'
