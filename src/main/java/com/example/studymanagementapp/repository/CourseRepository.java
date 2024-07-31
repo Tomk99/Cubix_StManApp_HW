@@ -1,6 +1,7 @@
 package com.example.studymanagementapp.repository;
 
 import com.example.studymanagementapp.model.Course;
+import com.example.studymanagementapp.model.CourseStat;
 import com.example.studymanagementapp.model.QCourse;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringExpression;
@@ -49,6 +50,12 @@ public interface CourseRepository
             }
         });
     }
+
+    @Query("select c.id as courseId, c.name as courseName, "
+            + "avg(s.semester) as averageSemesterOfStudents "
+            + "from Course c left join c.students s "
+            + "group by c")
+    List<CourseStat> getCourseStat();
 
     @EntityGraph(attributePaths = {"students"})
     @Query("select c from Course c where c.id = :id")

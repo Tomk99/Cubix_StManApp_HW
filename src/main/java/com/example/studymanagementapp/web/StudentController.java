@@ -7,7 +7,9 @@ import com.example.studymanagementapp.repository.StudentRepository;
 import com.example.studymanagementapp.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -26,6 +28,8 @@ public class StudentController implements StudentControllerApi {
     private final StudentRepository studentRepository;
     private final StudentService studentService;
 
+    HttpHeaders headers = new HttpHeaders();
+
 
     @Override
     public Optional<NativeWebRequest> getRequest() {
@@ -34,7 +38,8 @@ public class StudentController implements StudentControllerApi {
 
     @Override
     public ResponseEntity<StudentDto> findStudentById(Integer id) {
-        return ResponseEntity.ok(studentMapper.studentToDto(studentRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND))));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return ResponseEntity.ok().headers(headers).body(studentMapper.studentToDto(studentRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND))));
     }
 
     @Override
