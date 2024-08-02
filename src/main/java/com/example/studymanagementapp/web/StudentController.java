@@ -28,7 +28,6 @@ public class StudentController implements StudentControllerApi {
     private final StudentRepository studentRepository;
     private final StudentService studentService;
 
-    HttpHeaders headers = new HttpHeaders();
 
 
     @Override
@@ -38,8 +37,7 @@ public class StudentController implements StudentControllerApi {
 
     @Override
     public ResponseEntity<StudentDto> findStudentById(Integer id) {
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        return ResponseEntity.ok().headers(headers).body(studentMapper.studentToDto(studentRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND))));
+        return ResponseEntity.ok(studentMapper.studentToDto(studentRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND))));
     }
 
     @Override

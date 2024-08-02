@@ -42,7 +42,6 @@ public class CourseController implements CourseControllerApi {
     private final CourseMapper courseMapper;
     private final QuerydslPredicateArgumentResolver predicateResolver;
     private final PageableHandlerMethodArgumentResolver pageableResolver;
-    HttpHeaders headers = new HttpHeaders();
 
     @Override
     public Optional<NativeWebRequest> getRequest() {
@@ -53,22 +52,20 @@ public class CourseController implements CourseControllerApi {
     public ResponseEntity<List<CourseDto>> findAll(Boolean full, String teachers, String name, String students, Integer id, Integer page, Integer size, String sort) {
         Pageable pageable = createPageable("configPageable");
         Predicate predicate = createPredicate("configurePredicate");
-        headers.setContentType(MediaType.APPLICATION_JSON);
         boolean isFull = full != null && full;
         if (isFull) {
             Iterable<Course> courses = courseService.findAllWithAllParameters(predicate, pageable);
-            return ResponseEntity.ok().headers(headers).body(courseMapper.coursesToDtos(courses));
+            return ResponseEntity.ok(courseMapper.coursesToDtos(courses));
         } else {
             Iterable<Course> courses = courseRepository.findAll(predicate, pageable).getContent();
-            return ResponseEntity.ok().headers(headers).body(courseMapper.coursesToSummaryDtos(courses));
+            return ResponseEntity.ok(courseMapper.coursesToSummaryDtos(courses));
         }
     }
 
     @Override
     public ResponseEntity<CourseDto> findById(Integer id) {
-        headers.setContentType(MediaType.APPLICATION_JSON);
         try {
-            return ResponseEntity.ok().headers(headers).body(courseMapper.courseToDto(courseService.findByIdWithAllParameters(id)));
+            return ResponseEntity.ok(courseMapper.courseToDto(courseService.findByIdWithAllParameters(id)));
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
@@ -76,13 +73,12 @@ public class CourseController implements CourseControllerApi {
 
     @Override
     public ResponseEntity<List<HistoryDataCourseDto>> getHistory(Integer id) {
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        return ResponseEntity.ok().headers(headers).body(courseMapper.courseHistoriesToHistoryDataCourseDtos(courseService.getHistoryById(id)));
+        return ResponseEntity.ok(courseMapper.courseHistoriesToHistoryDataCourseDtos(courseService.getHistoryById(id)));
     }
 
     @Override
     public ResponseEntity<CourseDto> getVersionsAt(Integer id, LocalDateTime at) {
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(courseMapper.courseToDto(courseService.getVersionAt(id, at.atOffset(ZoneOffset.UTC))));
+        return ResponseEntity.ok(courseMapper.courseToDto(courseService.getVersionAt(id, at.atOffset(ZoneOffset.UTC))));
     }
 
     private Predicate createPredicate(String configMethodName) {
