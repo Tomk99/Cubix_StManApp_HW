@@ -15,10 +15,9 @@ import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.data.web.SortDefault;
 import org.springframework.data.web.querydsl.QuerydslPredicateArgumentResolver;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -26,6 +25,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.lang.reflect.Method;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -42,6 +42,7 @@ public class CourseController implements CourseControllerApi {
     private final CourseMapper courseMapper;
     private final QuerydslPredicateArgumentResolver predicateResolver;
     private final PageableHandlerMethodArgumentResolver pageableResolver;
+    private final SimpMessagingTemplate messagingTemplate;
 
     @Override
     public Optional<NativeWebRequest> getRequest() {
@@ -111,4 +112,11 @@ public class CourseController implements CourseControllerApi {
     }
     public void configurePredicate(@QuerydslPredicate(root = Course.class) Predicate predicate) {}
     public void configPageable(@SortDefault("id") org.springframework.data.domain.Pageable pageable) {}
+
+    @Override
+    public ResponseEntity<Void> cancelLesson(Integer courseId, LocalDate day) {
+        Course course = courseRepository.findById(courseId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        messagingTemplate.convertAndSend("/topic/courseChat"+courseId, "A %s kurzus %s napon elmarad.".formatted(course.getName(), day));
+        return ResponseEntity.ok().build();
+    }
 }
