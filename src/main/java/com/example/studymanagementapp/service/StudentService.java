@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
@@ -37,7 +39,7 @@ public class StudentService {
         }
     }
 
-    //@Scheduled(cron = "${studymanagementapp.updateFreeSemester.cron}")
+    @Scheduled(cron = "${studymanagementapp.updateFreeSemester.cron}")
     public void updateFreeSemesters() {
         List<Student> students = studentRepository.findAll();
         students.forEach(student -> {
@@ -66,5 +68,10 @@ public class StudentService {
         FileSystemResource fileSystemResource = new FileSystemResource(getProfilePicPathForStudent(studentId));
         if (!fileSystemResource.exists()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return fileSystemResource;
+    }
+
+    @Transactional
+    public void updateBalance(int studentId, int amount) {
+        studentRepository.findById(studentId).ifPresent(s -> s.setBalance(s.getBalance() + amount));
     }
 }

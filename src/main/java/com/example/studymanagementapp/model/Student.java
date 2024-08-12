@@ -27,4 +27,5 @@ public class Student {
     private int semester;
     private int eduId;
     private int numFreeSemesters;
+    private int balance;
 }
